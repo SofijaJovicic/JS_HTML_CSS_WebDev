@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tic Tac Toe</title>
+	<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@300&display=swap" rel="stylesheet">
+<!-- ovaj link nam treba zbog ikonica sunca i meseca -->
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="header" id="header">
+			<div class="left">
+				<div class="link active-link">
+					<a class="a" href="index.html">Home</a>
+				</div>
+				<div class="link">
+					<a class="a" href="about.html">About</a>
+				</div>
+			</div>
+			<div class="right">
+				<div>
+		<!-- for nam omogucava da prilikom kliktanja na labelu, ona se ponasa kao da smo kliknuli na ono sto je u inputu, a to je checkbox -->
+					<input type="checkbox" class="checkbox" id="chk"></input>
+					<label class="label" id="label" for="chk">
+						<i class="fas fa-moon"></i>
+						<i class="fas fa-sun"></i>
+						<div class="ball" id="ball"></div>
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="content">
+			<div class="board" id="board"> <!-- stavila sam i id board zbog js -->
+				<div class="cell"></div>
+				<div class="cell"></div>
+				<div class="cell"></div>
+				<div class="cell"></div>
+				<div class="cell"></div>
+				<div class="cell"></div>
+				<div class="cell"></div>
+				<div class="cell"></div>
+				<div class="cell"></div>
+			</div>
+			<div>
+				<button class="button-restart" id="buttonRestart">Restart</button>
+			</div>
+		</div>
+		
+		<div class="footer" id="footer">
+			Copyright &copy; 2020 Sofija Jovicic
+		</div>
+	</div>
+	
+	<div class="end-game" id="endGame">
+		<div class="message" id="message">
+		</div>
+		<div>
+			<button class="button-play-again" id="buttonPlayAgain">Play Again</button>
+		</div>
+	</div>
+</body>
+
+<script src="script.js"></script>
+
+</html>
+
+
+
+

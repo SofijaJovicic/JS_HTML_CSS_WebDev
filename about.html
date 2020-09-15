@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tic Tac Toe</title>
+	<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="header" id="header">
+			<div class="left">
+				<div class="link">
+					<a class="a" href="index.html">Home</a>
+				</div>
+				<div class="link active-link">
+					<a class="a" href="about.html">About</a>
+				</div>
+			</div>
+			<div class="right">
+				<input type="checkbox" class="checkbox" id="chk"></input>
+				<label class="label" id="label" for="chk">
+					<i class="fas fa-moon"></i>
+					<i class="fas fa-sun"></i>
+					<div class="ball" id="ball"></div>
+				</label>
+			</div>
+		</div>
+		
+		<div class="content">
+			<iframe class="inline-frame" id="inlineFrame"
+					src="https://en.wikipedia.org/wiki/Tic-tac-toe">
+			</iframe>
+		</div>
+		
+		<div class="footer" id="footer">
+			Copyright &copy; 2020 Sofija Jovicic
+		</div>
+	</div>
+</body>
+
+<script>
+const chk = document.getElementById('chk');
+const ball = document.getElementById('ball');
+const header = document.getElementById('header');
+const aItems = document.querySelectorAll('.a');
+const linkItems = document.querySelectorAll('.link');
+const label = document.getElementById('label');
+const footer = document.getElementById('footer');
+const inlineFrame = document.getElementById('inlineFrame');
+
+
+chk.addEventListener('change', () => {
+	document.body.classList.toggle('dark');
+	ball.classList.toggle('move');
+	header.classList.toggle('dark');
+	aItems.forEach(a => { a.classList.toggle('dark') });
+	linkItems.forEach(link => { link.classList.toggle('dark') });
+	label.classList.toggle('dark');
+	footer.classList.toggle('dark');
+	inlineFrame.classList.toggle('dark');
+});
+</script>
+
+</html>
+
+
+

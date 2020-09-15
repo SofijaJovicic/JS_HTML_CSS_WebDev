@@ -1,0 +1,422 @@
+body {
+	font-family: 'Grandstander', cursive, sans-serif;
+	margin: 5px;
+	background-color: rgb(255, 222, 236);
+	transition: background 0.5s linear;
+}
+
+/* menjamo u dark */
+body.dark {
+	background: rgb(41, 44, 53);
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom: 1px solid rgb(219, 0, 93);
+	transition: border-bottom-color 0.5s linear;
+}
+
+.header.dark {
+	border-bottom-color: rgb(51, 255, 0);
+}
+
+.left {
+	display: inline-flex;
+}
+
+.header > .left > div {
+	padding: 10px;
+	font-size: x-large;
+	margin-right: 20px;
+}
+
+/* kada predjem misem preko linkova, menja se boja */
+.link a {
+	color: rgb(219, 0, 93);
+	font-weight: 1000;
+	text-decoration: none;
+	transition: color 1s;
+}
+
+.link a:hover {
+	color: black;
+}
+
+.link a.dark {
+	color: rgb(51, 255, 0);
+}
+
+.link a:hover.dark {
+	color: white;
+}
+
+/* i podvlace se */
+.link,
+.link.dark {
+	height: 20px;
+	border-bottom: 1px solid transparent;
+	transition: border-bottom 1s;
+}
+
+.link:hover {
+	border-bottom: 1px solid black;
+}
+
+.link:hover.dark {
+	border-bottom: 1px solid white;
+}
+
+/* link koji je aktivan ostaje podvucen */
+.link.active-link {
+	border-bottom: 1px solid rgb(219, 0, 93);
+}
+
+.link.active-link:hover {
+	border-bottom: 1px solid black;
+}
+
+.link.active-link.dark {
+	border-bottom: 1px solid rgb(51, 255, 0);
+}
+
+.link.active-link:hover.dark {
+	border-bottom: 1px solid white;
+}
+
+.right {
+	display: inline;
+	padding: 10px;
+}
+
+.checkbox {
+	opacity: 0;
+	position: absolute; /* da bi bio tacno iza label, da se ne bi video */
+}
+
+.label {
+	background-color: rgb(219, 0, 93);
+	border-radius: 50px; /* u px, jer ako je u % napravice elipsu */
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	position: relative;
+	height: 24px;
+	width: 60px;
+	transition: background-color 0.5s linear;
+}
+
+.label.dark {
+	background-color: rgb(51, 255, 0);
+}
+
+.ball {
+	background-color: rgb(255, 222, 236);
+	border-radius: 100%;
+	position: absolute; /* da bih mogla da stavim manuelno top i left u odnosu na label */
+	top: 2px; /* na pocetku stoji levo, 2px gornja ivica od gornje ivice najblizeg pretka */
+	left: 2px;
+	height: 30px;
+	width: 30px;
+	transform: translateX(0px);
+	transition: transform 0.5s linear, background 0.5s linear; /* 0.5 sec se pomera po x osi za 36px */
+}
+
+.ball.move {
+	transform: translateX(36px);
+	background: rgb(41, 44, 53);
+}
+
+/* za sunce i mesec */
+.fa-moon {
+	color: #f1c40f;
+	transform: scale(1.4);
+}
+
+.fa-sun {
+	color: #f1c40f;
+	transform: scale(1.4);
+}
+
+
+
+
+
+
+
+.content {
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
+	align-items: center;
+	/*justify-items: center; ipak ne treba posto ravna po vertikali */
+}
+
+.content > div {
+	padding: 10px;
+}
+
+.board {
+	/*border: 1px solid rgb(219, 0, 93);*/
+	padding: 5px;
+	width: 60vw;
+	height: 60vh;
+	display: grid;
+	justify-content: center; /* poravnanje za board */
+	align-content: center;
+	justify-items: center; /* poravnanje za sve unutar board */
+	align-items: center;
+	grid-template-columns: repeat(3, auto); /* ponovljena kolona 3 puta jedna pored druge; auto=120px iz .cell */
+}
+
+.cell {
+	width: 120px;
+	height: 120px;
+	border: 2px solid rgb(219, 0, 93);
+	cursor: pointer; /* kada prelazim preko polja misem */
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	align-content: center;
+	justify-content: center;
+	transition: border-color 0.5s linear;
+}
+
+/* brisem spoljne granice */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+	border-top: none;
+}
+
+.cell:nth-child(3n) {
+	border-right: none;
+}
+
+.cell:nth-child(9),
+.cell:nth-child(8),
+.cell:nth-child(7) {
+	border-bottom: none;
+}
+
+.cell:nth-child(3n+1) {
+	border-left: none;
+}
+
+.cell.dark {
+	border-color: rgb(51, 255, 0);
+}
+
+/* kada prelazim misem preko polja koja su popunjena */
+.cell.x,
+.cell.o {
+	cursor: not-allowed;
+}
+
+/* nacrtani x - samo boja */
+.cell.x::before,
+.cell.x::after {
+	background-color: rgb(219, 0, 93);
+	transition: background-color 0.5s linear;
+}
+
+.cell.x.dark::before,
+.cell.x.dark::after {
+	background-color: rgb(51, 255, 0);
+}
+
+/* x koje tek zelim da nacrtam su sivi i u dark i light modu */
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+	background-color: lightgray;
+}
+
+/* crtam x */
+/* before i after ubacuju sadrzaj content pre/nakon nekog elementa (.cell.x) koji nije def.u html-u */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+	content: '';
+	width: calc(120px * .05);
+	height: 110px;
+	position: absolute; /* imaju istu baznu poziciju od parent-a */
+}
+	
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+	transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+	transform: rotate(-45deg);
+}
+
+/* crtam o */
+.cell.o::before {
+	background-color: transparent; /* necemo da obojimo unutrasnjost, samo border */
+	border: 6px solid rgb(219, 0, 93);
+	transition: border-color 0.5s linear;
+}
+
+.cell.o.dark::before {
+	border-color: rgb(51, 255, 0);
+}
+
+.board.o .cell:not(.x):not(.o):hover::before {
+	border: 6px solid lightgray;
+	background-color: transparent;
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+	content: '';
+	border-radius: 100%;
+	position: absolute;
+	width: 85px;
+	height: 85px;
+}
+
+.button-restart {
+	font-family: 'Grandstander', cursive, sans-serif;
+	font-size: 30px;
+	font-weight: 600;
+	text-align: center;
+	cursor: pointer;
+	border: 2px solid rgb(219, 0, 93);
+	background-color: rgb(255, 222, 236);
+	color: rgb(219, 0, 93);
+	padding: 10px;
+	transition: border-color 0.5s linear, background-color 0.5s linear, color 0.5s linear;
+}
+
+.button-restart:hover {
+	border-color: rgb(255, 222, 236);
+	background-color: rgb(219, 0, 93);
+	color: rgb(255, 222, 236);
+}
+
+.button-restart.dark {
+	border-color: rgb(51, 255, 0);
+	background-color: rgb(41, 44, 53);
+	color: rgb(51, 255, 0);
+}
+
+.button-restart:hover.dark {
+	border-color: rgb(41, 44, 53);
+	background-color: rgb(51, 255, 0);
+	color: rgb(41, 44, 53);
+}
+
+
+
+
+
+.footer {
+	text-align: right;
+	padding: 10px;
+	border-top: 1px solid rgb(219, 0, 93);
+	color: rgb(219, 0, 93);
+	transition: color 0.5s linear, border-top-color 0.5s linear;
+}
+
+.footer.dark {
+	color: rgb(51, 255, 0);
+	border-top-color: rgb(51, 255, 0);
+}
+
+/* ekran kada se zavrsi igra */
+.end-game {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .9);
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	display: none; /* da se ne pojavi na pocetku */
+}
+
+/* pojavi se sve ovo iz .end-game */
+.end-game.show {
+	display: flex;
+}
+
+.end-game > div {
+	padding: 30px;
+}
+
+.message {
+	color: rgb(219, 0, 93);
+	font-size: 50px;
+}
+
+.message.dark {
+	color: rgb(51, 255, 0);
+}
+
+.button-play-again {
+	font-family: 'Grandstander', cursive, sans-serif;
+	font-size: 30px;
+	font-weight: 600;
+	text-align: center;
+	cursor: pointer;
+	border: 2px solid rgb(219, 0, 93);
+	background-color: rgb(255, 222, 236);
+	color: rgb(219, 0, 93);
+	padding: 10px;
+	transition: border-color 0.5s linear, background-color 0.5s linear, color 0.5s linear;
+}
+
+.button-play-again:hover {
+	border: 2px solid rgb(255, 222, 236);
+	background-color: rgb(219, 0, 93);
+	color: rgb(255, 222, 236);
+}
+
+.button-play-again.dark {
+	border-color: rgb(51, 255, 0);
+	background-color: rgb(41, 44, 53);
+	color: rgb(51, 255, 0);
+}
+
+.button-play-again:hover.dark {
+	border-color: rgb(41, 44, 53);
+	background-color: rgb(51, 255, 0);
+	color: rgb(41, 44, 53);
+}
+
+.inline-frame {
+	border: 4px solid rgb(219, 0, 93);
+	width: 80vw;
+	height: 74.5vh;
+	justify-content: center;
+	align-content: center;
+	transition: border-color 0,5s linear;
+}
+
+.inline-frame.dark {
+	border-color: rgb(51, 255, 0);
+}
+
+
+
+
+
+
+
+
+
+
+
